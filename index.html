@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,9 +27,17 @@
     }
 
     @keyframes animatedGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     #loader {
@@ -63,7 +72,7 @@
       font-weight: 600;
       font-size: 2.25rem;
       letter-spacing: 1.5px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
       border-radius: 0 0 12px 12px;
       user-select: none;
       margin-bottom: 30px;
@@ -90,7 +99,7 @@
       cursor: pointer;
       user-select: none;
       transition: all 0.4s ease;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       position: relative;
       overflow: hidden;
     }
@@ -102,7 +111,7 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: rgba(255,255,255,0.1);
+      background: rgba(255, 255, 255, 0.1);
       transition: left 0.4s ease;
       z-index: 0;
     }
@@ -115,7 +124,7 @@
     .category-btn:focus {
       background-color: #669BBC;
       color: #003049;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
       transform: translateY(-2px);
     }
 
@@ -126,7 +135,7 @@
 
     .category-btn:active {
       transform: scale(0.97);
-      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
     }
 
     .menu-items {
@@ -196,6 +205,7 @@
         opacity: 0;
         transform: translateY(15px);
       }
+
       100% {
         opacity: 1;
         transform: translateY(0);
@@ -227,189 +237,197 @@
     }
   </style>
 </head>
+
 <body>
 
-<div id="loader">☕ Demlik Cafe Yükleniyor...</div>
+  <div id="loader">☕ Demlik Cafe Yükleniyor...</div>
 
-<header>☕ Demlik Cafe Menü</header>
+  <header>☕ Demlik Cafe Menü</header>
 
-<div class="categories" id="categoryList"></div>
-<div class="menu-items" id="menuItems"></div>
+  <div class="categories" id="categoryList"></div>
+  <div class="menu-items" id="menuItems"></div>
 
-<script>
-  const categories = {
-  "Pastalar": [
-    ["Limonlu Cheesecake", 220],
-    ["Frambuazlı Cheesecake", 220],
-    ["Mozaik", 220],
-    ["Tiramisu", 220],
-    ["Çikolatalı Pasta", 220],
-    ["Orman Meyveli", 220],
-    ["Mono Latte", 220],
-    ["Marlenka (Ballı Cevizli)", 250],
-    ["Sufle", 250],
-    ["Bella Festa Frambuazlı", 250],
-    ["Fıstık Şöleni", 250]
-  ],
-  "Kurabiyeler": [
-    ["Kurabiye Adam", 65],
-    ["Cookie", 90],
-    ["Elmalı Kurabiye", 90],
-    ["Fındık Kremalı", 90],
-    ["Tahinli Cevizli", 90],
-    ["Üzümlü Kurabiye", 90]
-  ],
-  "Lokmalık Kurabiyeler": [
-    ["Lokmalık 10 Adet", 70],
-    ["Tarçınlı", 100],
-    ["Damla Çikolatalı", 100],
-    ["Çörekotlu", 100],
-    ["1/2 Kg Paket", 275],
-    ["1 Kg Paket", 550]
-  ],
-  "Atıştırmalık": [
-    ["Simit", 50],
-    ["Günün Çorbası", 90],
-    ["Kafkas Böreği", 100],
-    ["Patates Kızartması", 150],
-    ["Kaşarlı Tost", 160],
-    ["Simit Tabağı", 180],
-    ["Karışık Tost", 200],
-    ["Patatesli Gözleme", 200],
-    ["Peynirli Gözleme", 200],
-    ["Ispanaklı Gözleme", 200],
-    ["Salata", 200],
-    ["Napoliten Makarna", 210],
-    ["Penne Arabiata Makarna", 210],
-    ["Menemen", 220],
-    ["Kaşarlı Gözleme", 250],
-    ["Kaşarlı Tost Tabağı", 280],
-    ["Sokak Kahvaltısı", 300],
-    ["Mantı (1 Porsiyon)", 300],
-    ["Kıymalı Gözleme", 300],
-    ["Sezar Salata", 300],
-    ["Karışık Tost Tabağı", 330],
-    ["Bolonez Makarna", 350],
-    ["Tavuklu Çökertme", 350],
-    ["Kahvaltı Tabağı", 370],
-    ["Mantı (1.5 Porsiyon)", 400]
-  ],
-  "Sıcak İçecekler": [
-    ["Ekstra Süt İlave", 35],
-    ["Bardak Çay", 50],
-    ["Oralet / Kivi Çayı", 50],
-    ["Karton Bardak Çay", 60],
-    ["Fincan Çay", 70],
-    ["Türk Kahvesi", 100],
-    ["Nescafe", 100],
-    ["Espresso", 100],
-    ["Sütlü Nescafe", 120],
-    ["Damla Sakızlı Türk Kahvesi", 130],
-    ["Dibek Kahvesi", 130],
-    ["Menengiç Kahvesi", 130],
-    ["Filtre Kahve", 140],
-    ["Duble Türk Kahvesi", 150],
-    ["Duble Espresso", 150],
-    ["Americano", 150],
-    ["Sütlü Türk Kahvesi", 170],
-    ["Cappuccino", 170],
-    ["Latte", 170],
-    ["Sıcak Çikolata", 170],
-    ["Çikolatalı Cappuccino", 180],
-    ["Salep", 180],
-    ["Ballı Süt", 200]
-  ],
-  "Bitki Çayları": [
-    ["Adaçayı", 150],
-    ["Ihlamur", 150],
-    ["Nane Limon", 150],
-    ["Yeşil Çay", 150],
-    ["Kış Çayı", 150],
-    ["Papatya", 150],
-    ["Rezene", 150],
-    ["Elma Tarçın", 150],
-    ["Kuşburnu", 150],
-    ["Melisa", 150]
-  ],
-  "Soğuk İçecekler": [
-    ["Su", 30],
-    ["Maden Suyu / Soda", 50],
-    ["Ayran", 50],
-    ["Limonlu Soda", 80],
-    ["Çilek Karpuz Aromalı Soda", 80],
-    ["Narlı Soda", 80],
-    ["Karadut Frenk Üzümlü Soda", 80],
-    ["Sıkma Limon / Soda", 100],
-    ["Coca Cola", 100],
-    ["Coca Cola Zero", 100],
-    ["Fanta", 100],
-    ["Sprite", 100],
-    ["Cappy Kayısı", 100],
-    ["Cappy Karışık", 100],
-    ["Cappy Şeftali", 100],
-    ["Cappy Vişne", 100],
-    ["Fuse Tea Limon", 100],
-    ["Fuse Tea Şeftali", 100],
-    ["Fuse Tea Karpuz", 100],
-    ["Fuse Tea Mango Ananas", 100],
-    ["Churchill", 120],
-    ["Limonata", 130],
-    ["Karadut Suyu", 130],
-    ["Taze Sıkılmış Portakal Suyu", 200]
-  ],
-  "Soğuk Kahveler": [
-    ["Ice Americano", 160],
-    ["Ice Filtre", 180],
-    ["Ice Latte", 190],
-    ["Ice Mocca", 200],
-    ["Ice Caramel", 200]
-  ]
-};
-
-
-  const categoryList = document.getElementById("categoryList");
-  const menuItems = document.getElementById("menuItems");
-
-  Object.keys(categories).forEach(cat => {
-    const btn = document.createElement("button");
-    btn.className = "category-btn";
-    btn.innerText = cat;
-    btn.onclick = () => {
-      renderItems(cat);
-      document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  <script>
+    const categories = {
+      "Pastalar": [
+        ["Limonlu Cheesecake", 220],
+        ["Profiteröllü Mono", 220],
+        ["Frambuazlı Cheesecake", 220],
+        ["Mozaik", 220],
+        ["Tiramisu", 220],
+        ["Devil's Food", 220],
+        ["Orman Meyveli", 220],
+        ["Mono Latte", 220],
+        ["Marlenka", 250],
+        ["Sufle", 250],
+        ["Frambuazlı Çikolatalı", 250],
+        ["Fıstık Rüyası", 250]
+      ],
+      "Kurabiyeler": [
+        ["Kurabiye Adam", 65],
+        ["Cookie", 90],
+        ["Elmalı Kurabiye", 90],
+        ["Fındık Kremalı", 90],
+        ["Tahinli Cevizli", 90],
+        ["Üzümlü Kurabiye", 90]
+      ],
+      "Lokmalık Kurabiyeler": [
+        ["Lokmalık 10 Adet", 70],
+        ["Tarçınlı", 100],
+        ["Damla Çikolatalı", 100],
+        ["Çörekotlu", 100],
+        ["Yarım Kg Paket", 275],
+        ["1 Kg Paket", 550]
+      ],
+      "Atıştırmalık": [
+        ["Simit", 50],
+        ["Günün Çorbası", 90],
+        ["Kafkas Böreği", 100],
+        ["Patates Kızartması", 150],
+        ["Kaşarlı Tost", 160],
+        ["Simit Tabağı", 180],
+        ["Karışık Tost", 200],
+        ["Patatesli Gözleme", 200],
+        ["Peynirli Gözleme", 200],
+        ["Ispanaklı Gözleme", 200],
+        ["Salata", 200],
+        ["Napoliten Makarna", 210],
+        ["Penne Arabiata Makarna", 210],
+        ["Menemen", 220],
+        ["Kaşarlı Gözleme", 250],
+        ["Kaşarlı Tost Tabağı", 280],
+        ["Sokak Kahvaltısı", 300],
+        ["Mantı 1 Porsiyon", 300],
+        ["Kıymalı Gözleme", 300],
+        ["Sezar Salata", 300],
+        ["Karışık Tost Tabağı", 330],
+        ["Bolonez Makarna", 350],
+        ["Tavuklu Çökertme", 350],
+        ["Kahvaltı Tabağı", 370],
+        ["Mantı 1.5 Porsiyon", 400]
+      ],
+      "Sıcak İçecekler": [
+        ["Ekstra Süt", 35],
+        ["Bardak Çay", 50],
+        ["Oralet Kivi Çayı", 50],
+        ["Karton Bardak Çay", 60],
+        ["Fincan Çay", 70],
+        ["Türk Kahvesi", 100],
+        ["Nescafe", 100],
+        ["Espresso", 100],
+        ["Sütlü Nescafe", 120],
+        ["Damla Sakızlı Türk Kahvesi", 130],
+        ["Dibek Kahvesi", 130],
+        ["Menengiç Kahvesi", 130],
+        ["Filtre Kahve", 140],
+        ["Duble Türk Kahvesi", 150],
+        ["Duble Espresso", 150],
+        ["Americano", 150],
+        ["Sütlü Türk Kahvesi", 170],
+        ["Cappuccino", 170],
+        ["Latte", 170],
+        ["Sıcak Çikolata", 170],
+        ["Çikolatalı Cappuccino", 180],
+        ["Salep", 180],
+        ["Ballı Süt", 200]
+      ],
+      "Bitki Çayları": [
+        ["Adaçayı", 150],
+        ["Ihlamur", 150],
+        ["Nane Limon", 150],
+        ["Yeşil Çay", 150],
+        ["Kış Çayı", 150],
+        ["Papatya", 150],
+        ["Rezene", 150],
+        ["Elma Tarçın", 150],
+        ["Kuşburnu", 150],
+        ["Melisa", 150]
+      ],
+      "Soğuk İçecekler": [
+        ["Su", 30],
+        ["Soda", 50],
+        ["Ayran", 50],
+        ["Limonlu Soda", 80],
+        ["Çilek Karpuz Aromalı Soda", 80],
+        ["Narlı Soda", 80],
+        ["Üzümlü Soda", 80],
+        ["Sıkma Limon Soda", 100],
+        ["Coca Cola", 100],
+        ["Coca Cola Zero", 100],
+        ["Fanta", 100],
+        ["Sprite", 100],
+        ["Cappy Kayısı", 100],
+        ["Cappy Karışık", 100],
+        ["Cappy Şeftali", 100],
+        ["Cappy Vişne", 100],
+        ["Fuse Tea Limon", 100],
+        ["Fuse Tea Şeftali", 100],
+        ["Fuse Tea Karpuz", 100],
+        ["Fuse Tea Mango Ananas", 100],
+        ["Churchill", 120],
+        ["Limonata", 130],
+        ["Karadut Suyu", 130],
+        ["Taze Sıkılmış Portakal Suyu", 200]
+      ],
+      "Soğuk Kahveler": [
+        ["Ice Americano", 160],
+        ["Ice Filtre", 180],
+        ["Ice Latte", 190],
+        ["Ice Mocca", 200],
+        ["Ice Caramel", 200]
+      ]
     };
-    categoryList.appendChild(btn);
-  });
 
-  function renderItems(category) {
-    menuItems.innerHTML = "";
-    categories[category].forEach(([name, price]) => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <img src="https://source.unsplash.com/400x300/?${encodeURIComponent(name)}" alt="${name}" loading="lazy" />
+
+    const categoryList = document.getElementById("categoryList");
+    const menuItems = document.getElementById("menuItems");
+
+    Object.keys(categories).forEach(cat => {
+      const btn = document.createElement("button");
+      btn.className = "category-btn";
+      btn.innerText = cat;
+      btn.onclick = () => {
+        renderItems(cat);
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      };
+      categoryList.appendChild(btn);
+    });
+
+    function renderItems(category) {
+      menuItems.innerHTML = "";
+      categories[category].forEach(([name, price]) => {
+        const imageName = name.toLowerCase()
+          .replace(/ /g, "-")
+          .replace(/[çğıöşü]/g, c => (
+            { 'ç': 'c', 'ğ': 'g', 'ı': 'i', 'ö': 'o', 'ş': 's', 'ü': 'u' }[c]
+          ));
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+        <img src="img/${imageName}.png" alt="${name}" loading="lazy" onerror="this.onerror=null; this.src='https://source.unsplash.com/400x300/?${encodeURIComponent(name)}'" />
         <div class="card-body">
           <div class="card-title">${name}</div>
           <div class="card-price">₺${price}</div>
         </div>
       `;
-      menuItems.appendChild(card);
-    });
-  }
-
-  window.onload = () => {
-    setTimeout(() => {
-      document.getElementById("loader").classList.add("fade-out");
-    }, 1000);
-    const firstCategory = Object.keys(categories)[0];
-    if (firstCategory) {
-      renderItems(firstCategory);
-      const firstBtn = categoryList.querySelector('button');
-      if (firstBtn) firstBtn.classList.add('active');
+        menuItems.appendChild(card);
+      });
     }
-  };
-</script>
+
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById("loader").classList.add("fade-out");
+      }, 1000);
+      const firstCategory = Object.keys(categories)[0];
+      if (firstCategory) {
+        renderItems(firstCategory);
+        const firstBtn = categoryList.querySelector('button');
+        if (firstBtn) firstBtn.classList.add('active');
+      }
+    };
+  </script>
 
 </body>
+
 </html>
