@@ -15,10 +15,10 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(-45deg, #FDF0D5, #D84545, #C1121F, #003049);
+      background: linear-gradient(-45deg, #FDF0D5, #D84545, #C1121F, #000000);
       background-size: 600% 600%;
       animation: animatedGradient 8s ease infinite;
-      color: #003049;
+      color: #000000;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -56,6 +56,29 @@
       color: #780000;
       transition: opacity 0.5s ease;
     }
+
+    #backToTop {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #780000;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+      z-index: 999;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    #backToTop:hover {
+      background-color: #000;
+      transform: translateY(-2px);
+    }
+
 
     #loader.fade-out {
       opacity: 0;
@@ -122,14 +145,14 @@
 
     .category-btn:hover,
     .category-btn:focus {
-      background-color: #669BBC;
-      color: #003049;
+      background-color: #000 !important;
+      color: #FDF0D5;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
       transform: translateY(-2px);
     }
 
     .category-btn.active {
-      background-color: #003049;
+      background-color: #000000;
       color: #FDF0D5;
     }
 
@@ -189,7 +212,7 @@
       font-weight: 600;
       font-size: 1.05rem;
       margin-bottom: 8px;
-      color: #003049;
+      color: #000000;
     }
 
     .card-price {
@@ -246,6 +269,8 @@
 
   <div class="categories" id="categoryList"></div>
   <div class="menu-items" id="menuItems"></div>
+  <button id="backToTop" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">↑ Yukarı</button>
+
 
   <script>
     const categories = {
@@ -421,6 +446,17 @@
         if (firstBtn) firstBtn.classList.add('active');
       }
     };
+
+    // Scroll ile buton görünürlüğü
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('backToTop');
+      if (window.scrollY > 300) {
+        btn.style.display = 'block';
+      } else {
+        btn.style.display = 'none';
+      }
+    });
+
   </script>
 
 </body>
