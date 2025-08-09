@@ -7,258 +7,236 @@
   <title>Demlik Cafe Menü</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(-45deg, #FDF0D5, #D84545, #C1121F, #000000);
-      background-size: 600% 600%;
-      animation: animatedGradient 8s ease infinite;
-      color: #000000;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0 15px 40px;
-    }
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(-45deg, #FDF0D5, #D84545, #C1121F, #000000);
+  background-size: 600% 600%;
+  animation: animatedGradient 8s ease infinite;
+  color: #000000;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 15px 40px;
+}
 
-    @keyframes animatedGradient {
-      0% {
-        background-position: 0% 50%;
-      }
+@keyframes animatedGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-      50% {
-        background-position: 100% 50%;
-      }
+#loader {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: white;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #780000;
+  transition: opacity 0.5s ease;
+}
 
-      100% {
-        background-position: 0% 50%;
-      }
-    }
+#backToTop {
+  position: fixed;
+  top: 20px; left: 20px;
+  background-color: #780000;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  display: none;
+  z-index: 999;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-    #loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: white;
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #780000;
-      transition: opacity 0.5s ease;
-    }
+#backToTop:hover {
+  background-color: #000;
+  transform: translateY(-2px);
+}
 
-    #backToTop {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      background-color: #780000;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      display: none;
-      z-index: 999;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
+#loader.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
 
-    #backToTop:hover {
-      background-color: #000;
-      transform: translateY(-2px);
-    }
+header {
+  width: 100%;
+  max-width: 1200px;
+  background: #780000;
+  color: white;
+  text-align: center;
+  padding: 25px 0;
+  font-weight: 600;
+  font-size: 2.25rem;
+  letter-spacing: 1.5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 12px 12px;
+  user-select: none;
+  margin-bottom: 30px;
+}
 
+.categories {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 35px;
+}
 
-    #loader.fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
+.category-btn {
+  background-color: #C1121F;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
 
-    header {
-      width: 100%;
-      max-width: 1200px;
-      background: #780000;
-      color: white;
-      text-align: center;
-      padding: 25px 0;
-      font-weight: 600;
-      font-size: 2.25rem;
-      letter-spacing: 1.5px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      border-radius: 0 0 12px 12px;
-      user-select: none;
-      margin-bottom: 30px;
-    }
+.category-btn::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: left 0.4s ease;
+  z-index: 0;
+}
 
-    .categories {
-      width: 100%;
-      max-width: 1200px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 14px;
-      margin-bottom: 35px;
-    }
+.category-btn:hover::after {
+  left: 0;
+}
 
-    .category-btn {
-      background-color: #C1121F;
-      color: white;
-      border: none;
-      padding: 12px 28px;
-      border-radius: 30px;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.4s ease;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      position: relative;
-      overflow: hidden;
-    }
+.category-btn:hover,
+.category-btn:focus {
+  background-color: #000 !important;
+  color: #FDF0D5;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
 
-    .category-btn::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.1);
-      transition: left 0.4s ease;
-      z-index: 0;
-    }
+.category-btn.active {
+  background-color: #000000;
+  color: #FDF0D5;
+}
 
-    .category-btn:hover::after {
-      left: 0;
-    }
+.category-btn:active {
+  transform: scale(0.97);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
 
-    .category-btn:hover,
-    .category-btn:focus {
-      background-color: #000 !important;
-      color: #FDF0D5;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-      transform: translateY(-2px);
-    }
+.menu-items {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 18px;
+}
 
-    .category-btn.active {
-      background-color: #000000;
-      color: #FDF0D5;
-    }
+.card {
+  background: #FDF0D5;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 1/1; /* kare */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: default;
+  user-select: none;
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+}
 
-    .category-btn:active {
-      transform: scale(0.97);
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-    }
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
 
-    .menu-items {
-      width: 100%;
-      max-width: 1200px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 24px;
-    }
+.card img {
+  width: 100%;
+  height: 60%;
+  object-fit: cover;
+  background-color: white;
+  padding: 4px;
+  transition: filter 0.3s ease;
+  filter: brightness(95%);
+}
 
-    .card {
-      background: #FDF0D5;
-      border-radius: 14px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      cursor: default;
-      user-select: none;
-      animation: fadeInUp 0.5s ease forwards;
-      opacity: 0;
-    }
+.card:hover img {
+  filter: brightness(100%);
+}
 
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
-    }
+.card-body {
+  flex: 1;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-    .card img {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
-      transition: filter 0.3s ease;
-      filter: brightness(95%);
-    }
+.card-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  color: #000000;
+}
 
-    .card:hover img {
-      filter: brightness(100%);
-    }
+.card-price {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #780000;
+  text-align: right;
+  user-select: text;
+}
 
-    .card-body {
-      padding: 15px 18px;
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
 
-    .card-title {
-      font-weight: 600;
-      font-size: 1.05rem;
-      margin-bottom: 8px;
-      color: #000000;
-    }
+@media (max-width: 480px) {
+  .card {
+    aspect-ratio: 1/1;
+  }
+  .card img {
+    height: 60%;
+    padding: 5px;
+  }
+  .category-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  .card-title {
+    font-size: 1rem;
+  }
+  .card-price {
+    font-size: 1rem;
+  }
+}
+</style>
 
-    .card-price {
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: #780000;
-      text-align: right;
-      user-select: text;
-    }
-
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 480px) {
-      header {
-        font-size: 1.8rem;
-        padding: 20px 0;
-      }
-
-      .category-btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
-      }
-
-      .card img {
-        height: 120px;
-      }
-
-      .card-title {
-        font-size: 1rem;
-      }
-
-      .card-price {
-        font-size: 1rem;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -310,12 +288,12 @@
         ["Kahvaltı Tabağı", 370],
         ["Sokak Kahvaltısı", 300],
         ["Menemen", 220],
-        ["Günün Çorbası", 90], 
+        ["Günün Çorbası", 90],
         ["Patates Kızartması", 150],
         ["Mantı", 300],
         ["Kaşarlı Tost", 160],
         ["Karışık Tost", 200],
-        ["Kaşarlı Tost Tabağı", 280], 
+        ["Kaşarlı Tost Tabağı", 280],
         ["Karışık Tost Tabağı", 330],
         ["Patatesli Gözleme", 200],
         ["Peynirli Gözleme", 200],
@@ -327,11 +305,11 @@
         ["Bolonez Makarna", 350],
         ["Salata", 200],
         ["Sezar Salata", 300],
-        ["Tavuklu Çökertme", 350],   
+        ["Tavuklu Çökertme", 350],
       ],
       "Sıcak İçecekler": [
         ["Bardak Çay", 50],
-        ["Fincan Çay", 70],   
+        ["Fincan Çay", 70],
         ["Karton Bardak Çay", 60],
         ["Oralet Kivi Çayı", 50],
         ["Türk Kahvesi", 100],
@@ -345,7 +323,7 @@
         ["Filtre Kahve", 140],
         ["Espresso", 100],
         ["Duble Espresso", 150],
-        ["Americano", 150],        
+        ["Americano", 150],
         ["Cappuccino", 170],
         ["Latte", 170],
         ["Çikolatalı Cappuccino", 180],
