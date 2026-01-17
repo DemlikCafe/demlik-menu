@@ -193,31 +193,25 @@ header {
   padding: 10px 14px;
   display: flex;
   flex-direction: column;
-  /* NOT: justify-content: space-between kaldırıldı */
 }
 
 .card-title {
   font-weight: 600;
   font-size: 0.95rem;
-  margin: 0 0 8px 0;
   color: #000000;
-  line-height: 1.2;
-  /* Uzun başlıkların kart düzenini bozmaması için 2 satır rezervi:
-     - 2 satırı aşan metin kısalır; görünüm sabit kalır */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  min-height: 2.6rem;
+  line-height: 1.25;
+  margin-bottom: 6px;
+
+  /* 🔥 fiyat kaymaması için SABİT ALAN */
+  min-height: 2.6em;
 }
 
 .card-price {
-  margin-top: auto; /* 🔥 fiyatı her zaman kartın en altına sabitler */
+  margin-top: auto; /* 🔥 fiyat her zaman en altta */
   font-weight: 700;
   font-size: 1rem;
   color: #780000;
   text-align: right;
-  user-select: text;
 }
 
 @keyframes fadeInUp {
