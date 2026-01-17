@@ -193,17 +193,26 @@ header {
   padding: 10px 14px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* NOT: justify-content: space-between kaldırıldı */
 }
 
 .card-title {
   font-weight: 600;
   font-size: 0.95rem;
-  margin-bottom: 8px;
+  margin: 0 0 8px 0;
   color: #000000;
+  line-height: 1.2;
+  /* Uzun başlıkların kart düzenini bozmaması için 2 satır rezervi:
+     - 2 satırı aşan metin kısalır; görünüm sabit kalır */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.6rem;
 }
 
 .card-price {
+  margin-top: auto; /* 🔥 fiyatı her zaman kartın en altına sabitler */
   font-weight: 700;
   font-size: 1rem;
   color: #780000;
@@ -256,11 +265,11 @@ header {
         ["Limonlu Cheesecake", 250],
         ["Frambuazlı Cheesecake", 250],
         ["Tiramisu", 280],
-        ["Mozaik", 280],
+        ["Mozaik", 250],
         ["Marlenka", 300],
         ["Cikolatalı Pasta", 250],
         ["Orman Meyveli", 250],
-        ["Mono Latte", 220],
+        ["Mono Latte", 250],
         ["Profiteröllü Mono", 250],
         ["Sufle", 250],
         ["Frambuazlı Çikolatalı", 250],
@@ -273,9 +282,9 @@ header {
         ["Tahinli Cevizli", 110],
         ["Üzümlü Kurabiye", 110],
         ["Kurabiye Adam", 80],
-        ["Tarçınlı", 100],
-        ["Damla Çikolatalı", 100],
-        ["Çörekotlu", 100],
+        ["Tarçınlı", 130],
+        ["Damla Çikolatalı", 130],
+        ["Çörekotlu", 130],
         ["1 Kg Paket", 600]
         ["Yarım Kg Paket", 300],
         ["Lokmalık 15 Adet", 130],
@@ -309,9 +318,9 @@ header {
       "Sıcak İçecekler": [
         ["Bardak Çay", 50],
         ["Fincan Çay", 70],
-        ["Karton çay bardaği küçük", 70],
-        ["Karton çay bardaği büyük", 70],
-        ["Oralet Kivi Çayı", 50],
+        ["Karton bardak çay küçük", 70],
+        ["Karton bardak çay büyük", 70],
+        ["Oralet-Kivi Çayı", 50],
         ["Türk Kahvesi", 120],
         ["Duble Türk Kahvesi", 180],
         ["Sütlü Türk Kahvesi", 200],
@@ -348,6 +357,7 @@ header {
         ["Sıkma Limon Soda", 130],
         ["Churchill", 170],
         ["Limonlu Soda", 100],
+        ["Elmalı Soda", 100],
         ["Çilek Karpuz Aromalı Soda", 100],
         ["Karadut Frenk Üzümlü Soda", 100],
         ["Limonata", 170],
